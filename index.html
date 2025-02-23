@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Photo Booth</title>
+</head>
+<body>
+
+    <h1>Photo Booth</h1>
+
+    <div class="layout-buttons">
+        <button class="layout-button" data-layout="1x3">1x3</button>
+        <button class="layout-button" data-layout="1x4">1x4</button>
+        <button class="layout-button" data-layout="2x3">2x3</button>
+        <button class="layout-button" data-layout="2x4">2x4</button>
+    </div>
+    <div class="filter-buttons">
+        <button class="filter-button" data-filter="none">None</button>
+        <button class="filter-button" data-filter="grayscale(100%)">B/W</button>
+        <button class="filter-button" data-filter="sepia(100%)">Sepia</button>
+        <button class="filter-button" data-filter="invert(100%)">Invert</button>
+        <button class="filter-button" data-filter="contrast(200%) brightness(120%)">Bright</button>
+        <button class="filter-button" data-filter="blur(3px)">Blur</button>
+    </div>
+
+    <video id="video" autoplay></video>
+    <div id="loadingMessage" class="loading" style="display:none;">Initializing camera...</div>
+    <div id="errorMessage" class="error" style="display:none;"></div>
+    <br>
+    
+    <button id="captureButton" style="display:none;">Capture</button>
+    <div id="retakeButtonsContainer"></div>
+    <canvas id="canvas"></canvas>
+    <canvas id="photoGridCanvas"></canvas>
+    <img id="photoGrid" class="photo-grid"/>
+    <button id="downloadButton" style="display:none;">Download Photo</button>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

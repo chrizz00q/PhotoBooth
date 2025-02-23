@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f3f3f3;
+}
+
+.layout-buttons, .filter-buttons {
+    margin-bottom: 20px;
+}
+
+.layout-button, .filter-button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.layout-button:hover, .filter-button:hover {
+    background-color: #0056b3;
+}
+
+.layout-button.active, .filter-button.active {
+    background-color: #28a745;
+}
+
+video {
+    border: 2px solid black;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    transform: scaleX(-1);
+    border-radius: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+canvas {
+    display: none;
+}
+
+.photo-grid {
+    display: none;
+    margin: 20px auto;
+    border: 1px solid black;
+    padding: 10px;
+    width: 420px;
+    max-width: 100%;
+}
+
+#retakeButtonsContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.retake-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.retake-btn:hover {
+    background-color: #c82333;
+}
+
+.filter-buttons {
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+.filter-button.active {
+    background-color: #28a745;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+    .layout-button, .filter-button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .photo-grid {
+        width: 90%;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    video {
+        max-width: 100%;
+    }
+
+    .layout-buttons, .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .layout-button, .filter-button {
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .layout-button, .filter-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .photo-grid {
+        width: 100%;
+    }
+
+    video {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .retake-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
