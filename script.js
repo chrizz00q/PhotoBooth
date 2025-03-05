@@ -17,7 +17,8 @@ let capturedImages = [];
 let selectedLayout = null;
 let selectedFilter = 'none';
 
-window.onload = async () => {
+// ✅ Adaptive Camera Access (Works for iOS & Android)
+async function startCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         showError('Your browser does not support camera access.');
         return;
@@ -25,30 +26,35 @@ window.onload = async () => {
 
     loadingMessage.style.display = 'block';
 
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "user",  // Use "environment" for rear camera
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            }
-        });
+    const constraints = {
+        video: {
+            facingMode: { ideal: "user" }, // Default to front camera, auto-adjust
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+        }
+    };
 
+    try {
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
         videoElement.srcObject = stream;
         captureButton.style.display = 'inline-block';
         loadingMessage.style.display = 'none';
     } catch (error) {
+        console.error("Camera Error:", error);
         showError('Error accessing camera. Please check your settings.');
     }
-};
+}
 
+window.onload = startCamera;
+
+// ✅ Show Error Messages
 function showError(message) {
     loadingMessage.style.display = 'none';
     errorMessage.style.display = 'block';
     errorMessage.innerText = message;
 }
 
-// Layout Selection
+// ✅ Layout Selection
 layoutButtons.forEach(button => {
     button.addEventListener('click', (event) => {
         layoutButtons.forEach(btn => btn.classList.remove('active'));
@@ -63,19 +69,19 @@ layoutButtons.forEach(button => {
     });
 });
 
-// Filter Selection
+// ✅ Filter Selection
 filterButtons.forEach(button => {
     button.addEventListener('click', (event) => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
         selectedFilter = event.target.dataset.filter;
 
-        // iOS Safari does not support `filter` on live video, so apply it only to the canvas
+        // iOS Safari doesn't support live filters on video, so we only apply it on capture
         videoElement.style.filter = selectedFilter;
     });
 });
 
-// Capture Button
+// ✅ Capture Button Logic
 captureButton.addEventListener('click', async () => {
     if (!selectedLayout) {
         alert("Please select a layout before capturing.");
@@ -98,7 +104,7 @@ captureButton.addEventListener('click', async () => {
     captureButton.innerText = "Again";
 });
 
-// Capture Image
+// ✅ Capture Photo
 function capturePhoto() {
     captureImageToCanvas();
     capturedImages.push(canvas.toDataURL('image/jpeg', 0.95));
@@ -112,12 +118,12 @@ function captureImageToCanvas() {
     context.save();
     context.translate(canvas.width, 0);
     context.scale(-1, 1);
-    context.filter = selectedFilter;  // Apply filter only to the captured image
+    context.filter = selectedFilter;  // Apply filter only to captured image
     context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
     context.restore();
 }
 
-// Generate Photo Grid
+// ✅ Generate Photo Grid
 function generatePhotoGrid() {
     if (capturedImages.length !== selectedLayout.total) return;
 
@@ -172,7 +178,7 @@ function generatePhotoGrid() {
     });
 }
 
-// Create Retake Buttons
+// ✅ Create Retake Buttons
 function createRetakeButtons() {
     retakeButtonsContainer.innerHTML = '';
     for (let i = 0; i < selectedLayout.total; i++) {
@@ -188,7 +194,7 @@ function createRetakeButtons() {
     }
 }
 
-// Retake a Photo
+// ✅ Retake a Photo
 async function replacePhoto(index) {
     await countdown();
     captureImageToCanvas();
@@ -196,7 +202,7 @@ async function replacePhoto(index) {
     generatePhotoGrid();
 }
 
-// Download Photo Grid
+// ✅ Download Photo Grid
 downloadButton.addEventListener('click', () => {
     const link = document.createElement('a');
     link.href = gridCanvas.toDataURL('image/jpeg', 0.95);
@@ -204,7 +210,7 @@ downloadButton.addEventListener('click', () => {
     link.click();
 });
 
-// Countdown Before Capture
+// ✅ Countdown Before Capture
 function countdown() {
     return new Promise((resolve) => {
         let count = 2;
