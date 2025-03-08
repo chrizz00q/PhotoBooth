@@ -228,3 +228,6 @@ function countdown() {
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+if (window.innerWidth < 1024) {
+  document.querySelector("meta[name=viewport]").setAttribute("content", "width=1024");
+}
