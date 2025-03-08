@@ -136,24 +136,3 @@ canvas {
         margin: 5px;
     }
 }
-
-@media (max-width: 480px) {
-    .layout-button, .filter-button {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-
-    .photo-grid {
-        width: 100%;
-    }
-
-    video {
-        max-width: 100%;
-        border-radius: 10px;
-    }
-
-    .retake-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-}
